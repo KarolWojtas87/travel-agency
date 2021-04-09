@@ -12,6 +12,7 @@ const OrderOptionDropdown = ({ values, required, currentValue, setOptionValue })
     {required ? '' : (
       <option key='null' value=''>---</option>
     )}
+
     {values.map(value => (
       <option
         key={value.id}
@@ -28,7 +29,7 @@ OrderOptionDropdown.propTypes = {
   currentValue: propTypes.string,
   setOptionValue: propTypes.func,
   values: propTypes.any,
-  required: propTypes.any,
+  required: propTypes.node,
 };
 
 
