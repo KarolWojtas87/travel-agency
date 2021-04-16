@@ -10,7 +10,7 @@ import OrderOptionText from './OrderOptionText';
 
 
 const OrderOption = ({ name, type, id, setOrderOption, ...otherProps }) => {
-  { console.log({ name, type, id, setOrderOption, ...otherProps }); }
+
   const OptionComponent = optionTypes[type];
   if (!OptionComponent) {
     return null;

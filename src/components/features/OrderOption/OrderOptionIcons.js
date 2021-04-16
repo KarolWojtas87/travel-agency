@@ -8,35 +8,36 @@ import propTypes from 'prop-types';
 const OrderOptionIcons = ({ values, setOptionValue, currentValue, required }) => (
 
   <div className={styles.icon}>
-    {console.log(values, setOptionValue, currentValue)}
+
 
     {required ? false : ''(
       <div className={styles.icon} onClick={() => setOptionValue('')} value=''>
-        <Icon name={'times-circle'} /> none
+        <Icon name={'times-circle'} > none </Icon>
       </div>
     )}
-
     {values.map(value => (
       <div
-        // value={currentValue}
-        className={currentValue == value.id ? styles.iconActive : styles.icon}
+        className={currentValue == value.id ? styles.iconActive : ''}
         key={value.id}
-        onClick={(value) => setOptionValue(value.id)}
+        onClick={() => setOptionValue(value.id)}
       >
         <Icon name={value.icon}></Icon>
         {value.name} ({formatPrice(value.price)})
       </div>
     ))}
 
-  </div>
+  </div >
+
 );
+
 
 OrderOptionIcons.propTypes = {
   currentValue: propTypes.string,
   setOptionValue: propTypes.func,
   price: propTypes.string,
-  values: propTypes.any,
-  required: propTypes.node,
+  values: propTypes.array,
+  required: propTypes.bool,
+  id: propTypes.string,
 };
 
 
