@@ -16,7 +16,7 @@ describe('Component TripSummary', () => {
   it('should have correct src & alt of <img>', () => {
     const expectedSrc = 'image.jpg';
     const expectedAlt = 'image';
-    const component = shallow(<TripSummary src={expectedSrc} alt={expectedAlt} />);
+    const component = shallow(<TripSummary image={expectedSrc} name={expectedAlt} />);
     expect(component.find('img').prop('src')).toEqual(expectedSrc);
     expect(component.find('img').prop('alt')).toEqual(expectedAlt);
 
@@ -24,12 +24,15 @@ describe('Component TripSummary', () => {
 
   it('should render props of name, cost & days', () => {
     const expectedName = 'Name';
-    const expectedCost = 'Cost';
-    const expectedDays = 5;
-    const component = shallow(<TripSummary />);
-    expect(component.find('.title').prop('name')).toEqual(expectedName);
-    expect(component.find('.details span').prop('cost')).toEqual(expectedCost);
-    expect(component.find('.details span').prop('days')).toEqual(expectedDays);
+    const expectedCost = 'from $139';
+    const expectedDays = '7 days';
+    const component = shallow(<TripSummary cost='$139' name={expectedName} days={7} />);
+    const renderedName = component.find('.title').text();
+    const renderedCost = component.find('.details span').at(1).text();
+    const renderedDays = component.find('.details span').at(0).text();
+    expect(renderedName).toEqual(expectedName);
+    expect(renderedCost).toEqual(expectedCost);
+    expect(renderedDays).toEqual(expectedDays);
   });
 
   it('should return error when missing id, img, name, cost & days', () => {
@@ -37,18 +40,17 @@ describe('Component TripSummary', () => {
   });
 
   it('should render tags array', () => {
-    const expectedTags = ['beach', 'pool', 'spa'];
-    const component = shallow(<TripSummary tags={expectedTags} />);
-    console.log(component.find('.tags'));
-    expect(component.find('.tags span').at(0).toEqual('beach'));
-    expect(component.find('.tags span').at(1).toEqual('pool'));
-    expect(component.find('.tags span').at(2).toEqual('spa'));
+    // const expectedTags = ['beach', 'pool', 'spa'];
+    const component = shallow(<TripSummary tags={['beach', 'pool', 'spa']} />);
+
+    expect(component.find('.tags').at(0).text().toEqual('beach'));
+    expect(component.find('.tags').at(1).text().toEqual('pool'));
+    expect(component.find('.tags').at(2).text().toEqual('spa'));
   });
 
   it('should not be rendered if tags array is falsy', () => {
     const expectedTags = [];
     const component = shallow(<TripSummary tags={expectedTags} />);
-    console.log(component.find('.tags'));
     expect(component.find('.tags')).to.have.lengthOf(0);
   });
 
