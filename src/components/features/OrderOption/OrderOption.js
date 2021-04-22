@@ -34,6 +34,7 @@ const optionTypes = {
   number: OrderOptionNumber,
   date: OrderOptionDate,
   text: OrderOptionText,
+
 };
 
 
